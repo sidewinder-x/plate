@@ -1,0 +1,29 @@
+# frontend/.gitignore
+
+# Зависимости
+/node_modules
+
+# Папка со сборкой проекта
+/dist
+
+# Логи
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Файлы переменных окружения (ОЧЕНЬ ВАЖНО!)
+# Здесь могут храниться ключи API, токены. Их нельзя публиковать.
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Системные и редакторские файлы
+.DS_Store
+.idea/
+.vscode/
+
+/node_modules
+/dist
+.env

@@ -1,0 +1,20 @@
+/* src/pages/PaymentPage.css */
+.payment-page {
+    height: 100vh;
+    box-sizing: border-box;
+    padding: 20px;
+    padding-bottom: 80px;
+    display: flex;
+    flex-direction: column;
+}
+.payment-title { font-size: 24px; font-weight: 600; text-align: center; margin-bottom: 30px; }
+.card-form { display: flex; flex-direction: column; gap: 20px; }
+.input-group { display: flex; flex-direction: column; }
+.input-group label { font-size: 14px; font-weight: 500; color: var(--hint-color); margin-bottom: 8px; }
+.input-group input { width: 100%; padding: 14px; border: 1px solid #e0e0e0; border-radius: 8px; font-size: 16px; background-color: var(--secondary-bg-color); box-sizing: border-box; }
+.input-with-icon { position: relative; }
+.input-with-icon svg { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--hint-color); }
+.input-with-icon input { padding-left: 45px; }
+.row { display: flex; gap: 20px; }
+.row .input-group { flex: 1; }
+.secure-note { display: flex; align-items: center; gap: 8px; color: var(--hint-color); font-size: 13px; margin-top: auto; justify-content: center; }

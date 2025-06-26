@@ -1,0 +1,120 @@
+/* src/pages/ResultsPage.css */
+
+/* ИЗМЕНЕНИЕ: Делаем саму страницу скроллируемым контейнером */
+.results-page {
+  height: 100vh; /* Занимает всю высоту экрана */
+  height: 100dvh; /* Новая единица для мобильных, учитывает панели браузера */
+  overflow-y: auto; /* Включаем вертикальный скролл */
+  -webkit-overflow-scrolling: touch; /* Плавный скролл на iOS */
+  box-sizing: border-box; /* Чтобы padding не ломал расчет высоты */
+  padding: 15px;
+  padding-top: 25px;
+  padding-bottom: 80px; /* Отступ для кнопки "Завершить" */
+}
+
+/* --- Стили для состояния загрузки --- */
+.results-page.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 16px;
+  color: var(--hint-color);
+  /* height и overflow уже заданы выше */
+}
+
+.spinner {
+  width: 48px;
+  height: 48px;
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #3498db;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* --- Общие стили для страницы результатов --- */
+.results-title {
+  font-size: 24px;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.section-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.best-choice-section, .other-options-section {
+  margin-bottom: 30px;
+}
+
+/* --- Стили для карточек рецептов --- */
+.recipe-card {
+  background-color: var(--secondary-bg-color);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.card-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+.card-image.small {
+  height: 120px;
+}
+
+.card-content {
+  padding: 15px;
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 8px;
+}
+.card-title.small {
+  font-size: 15px;
+  margin-bottom: 4px;
+}
+
+.card-description {
+  font-size: 14px;
+  color: var(--hint-color);
+  margin: 0 0 12px;
+}
+
+.card-tags {
+  display: flex;
+  gap: 8px;
+}
+.tag {
+  background-color: #e0e0e0;
+  color: #333;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.other-options-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+/* Прогресс-бар */
+.progress-bar { display: flex; gap: 8px; margin-bottom: 20px; }
+.progress-step { flex: 1; height: 4px; background-color: #e0e0e0; border-radius: 2px; }
+.progress-step.filled { background-color: #38E07A; }
+.progress-step.active { background-color: #38E07A; }

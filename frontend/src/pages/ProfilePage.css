@@ -1,0 +1,72 @@
+/* src/pages/ProfilePage.css */
+
+.profile-page {
+    padding: 15px;
+    padding-bottom: 80px;
+}
+
+/* --- Карточка пользователя --- */
+.user-info-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-top: 20px;
+}
+.user-avatar { width: 80px; height: 80px; border-radius: 50%; margin-bottom: 12px; object-fit: cover; border: 2px solid var(--secondary-bg-color); }
+.user-name { font-size: 22px; font-weight: 600; margin: 0; color: var(--text-color); }
+.user-id { font-size: 16px; color: var(--hint-color); margin: 4px 0 0; }
+
+/* --- Секция с настройками --- */
+.settings-section { background-color: var(--secondary-bg-color); border-radius: 12px; margin-bottom: 30px; overflow: hidden; }
+.settings-item { display: flex; justify-content: space-between; align-items: center; padding: 16px; cursor: pointer; font-size: 16px; font-weight: 500; color: var(--text-color); }
+.settings-item:not(:last-child) { border-bottom: 1px solid #e5e5e5; }
+.item-arrow { color: var(--hint-color); }
+.item-value { display: flex; align-items: center; gap: 4px; color: var(--hint-color); }
+
+/* --- Карточка подписки --- */
+.subscription-card { background-color: #F0F5F2; border-radius: 16px; padding: 20px; display: flex; align-items: center; gap: 16px; }
+.subscription-icon { color: #28ff7e; }
+.subscription-info { flex-grow: 1; }
+.subscription-title { font-size: 16px; font-weight: 600; margin: 0 0 4px; color: #333; }
+.subscription-description { font-size: 14px; color: #666; margin: 0; }
+.upgrade-button { background-color: #28ff7e; color: #000; border: none; border-radius: 10px; padding: 10px 16px; font-weight: 600; cursor: pointer; }
+
+
+/* --- НОВЫЕ СТИЛИ ДЛЯ СКЕЛЕТНОЙ ЗАГРУЗКИ --- */
+@keyframes shimmer {
+  0% { background-position: -468px 0; }
+  100% { background-position: 468px 0; }
+}
+
+.skeleton {
+  animation: shimmer 2s infinite linear;
+  background: linear-gradient(to right, #f6f7f8 8%, #edeef1 18%, #f6f7f8 33%);
+  background-size: 800px 104px;
+  height: 16px;
+  border-radius: 8px;
+}
+
+.skeleton-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-bottom: 12px;
+}
+
+.skeleton-text {
+  margin-top: 4px;
+}
+
+.skeleton-row {
+  height: 53px;
+  border-radius: 0; /* Ряды в настройках не скругленные */
+}
+.skeleton-row:not(:last-child) {
+    border-bottom: 1px solid white;
+}
+
+.skeleton-card {
+    height: 94px;
+    border-radius: 16px;
+}

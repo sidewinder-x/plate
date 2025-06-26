@@ -1,0 +1,100 @@
+/* src/pages/IngredientsPage.css */
+
+.ingredients-page {
+    padding: 15px;
+    /* Отступ сверху для шкалы прогресса */
+    padding-top: 25px; 
+  }
+  
+  /* --- Шкала прогресса --- */
+  .progress-bar {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+  
+  .progress-step {
+    flex: 1;
+    height: 4px;
+    background-color: #e0e0e0; /* Цвет неактивного шага */
+    border-radius: 2px;
+  }
+  
+  .progress-step.active {
+    background-color: #38E07A; /* Цвет активного шага */
+  }
+  
+  /* --- Заголовок --- */
+  .ingredients-title {
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 24px;
+  }
+  
+  /* --- Поиск / Добавление своего ингредиента --- */
+  .search-bar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .search-bar input {
+    flex-grow: 1;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid var(--hint-color);
+    background-color: var(--secondary-bg-color);
+    color: var(--text-color);
+    font-size: 16px;
+  }
+  
+  .search-bar button {
+    padding: 0 20px;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--button-color);
+    color: var(--button-text-color);
+    font-weight: 600;
+    cursor: pointer;
+  }
+  
+  /* --- Сетка для плиток ингредиентов --- */
+  .ingredients-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Три колонки для маленьких плиток */
+    gap: 10px;
+    /* Отступ снизу, чтобы контент не уходил ПОД нативную кнопку "Дальше" */
+    padding-bottom: 80px; 
+  }
+  
+  /* --- Стили для самих плиток --- */
+  .ingredient-tile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 5px; /* Уменьшенные отступы для компактности */
+    border-radius: 10px;
+    border: 1px solid #e0e0e0;
+    background-color: var(--secondary-bg-color);
+    color: var(--text-color);
+    transition: all 0.2s ease-in-out;
+    font-family: inherit;
+    font-size: 13px; /* Уменьшенный шрифт */
+    font-weight: 500;
+    text-align: center;
+    cursor: pointer;
+  }
+  
+  /* Стиль для ВЫБРАННОЙ плитки */
+  .ingredient-tile.selected {
+    background-color: #38E07A;
+    color: #ffffff;
+    border-color: #38E07A;
+    transform: scale(1.05);
+  }
+  
+  /* Прячем эмодзи на маленьких плитках для более чистого вида */
+  .ingredient-emoji {
+    display: none;
+  }

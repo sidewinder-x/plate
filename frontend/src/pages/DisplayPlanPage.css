@@ -1,0 +1,19 @@
+.display-plan-page {
+    height: 100vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    box-sizing: border-box;
+    padding: 15px;
+}
+.display-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.display-header .plan-title { margin: 0; text-align: left; font-size: 24px; font-weight: 600; }
+.create-new-button { display: flex; align-items: center; gap: 8px; background-color: var(--secondary-bg-color); border: none; padding: 8px 12px; border-radius: 8px; font-weight: 600; color: var(--text-color); cursor: pointer; }
+.total-cost-card { background-color: #F0F5F2; padding: 16px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; font-size: 16px; color: #333; }
+.days-container { display: flex; flex-direction: column; gap: 15px; }
+.day-card { background-color: var(--secondary-bg-color); border-radius: 12px; padding: 16px; }
+.day-title { font-size: 18px; font-weight: 600; margin: 0 0 12px; padding-bottom: 8px; border-bottom: 1px solid #e5e5e5; }
+.meals-list { display: flex; flex-direction: column; gap: 10px; }
+.meal-item { display: flex; justify-content: space-between; }
+.meal-item.clickable { cursor: pointer; }
+.meal-name { font-weight: 500; color: var(--hint-color); }
+.dish-name { font-weight: 500; color: var(--text-color); text-align: right; }

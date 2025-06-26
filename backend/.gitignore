@@ -1,0 +1,22 @@
+# backend/.gitignore
+
+# Зависимости
+/node_modules
+
+# Логи
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Файлы переменных окружения (САМОЕ ВАЖНОЕ!)
+# Сюда вы в будущем запишете ТОКЕН БОТА, чтобы не хранить его в коде.
+# Никогда не публикуйте этот файл!
+.env
+
+# Системные файлы
+.DS_Store
+
+*.json
+
+/node_modules
+firebase-service-account.json
