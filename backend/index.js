@@ -2,34 +2,38 @@ const express = require('express');
 const cors = require('cors');
 const crypto = require('crypto');
 const admin = require('firebase-admin');
-const path = require('path'); // Добавляем модуль для работы с путями
+const path = require('path');
 
 // --- НАСТРОЙКА ---
-// Подключаем наш секретный ключ к Firebase
-const serviceAccount = require('./firebase-service-account.json');
+// ИЗМЕНЕНИЕ: Читаем ключ из переменных окружения, а не из файла
+const serviceAccountString = process.env.FIREBASE_SERVICE_ACCOUNT;
+
+if (!serviceAccountString) {
+  // Эта ошибка появится в логах Render, если вы забыли добавить переменную
+  throw new Error("Секретный ключ Firebase (FIREBASE_SERVICE_ACCOUNT) не найден в переменных окружения.");
+}
+
+// Превращаем строку обратно в JSON-объект
+const serviceAccount = JSON.parse(serviceAccountString);
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)
 });
 
 const db = admin.firestore();
-// ВАЖНО: Вставьте сюда токен вашего бота из @BotFather
-const BOT_TOKEN = 'ВАШ_ТОКЕН_БОТА_СЮДА';
+// ВАЖНО: Не забудьте вставить ваш токен сюда или добавить его как вторую переменную окружения
+const BOT_TOKEN = process.env.BOT_TOKEN;
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
 // --- РАЗДАЧА ФРОНТЕНДА ---
-// Указываем Express, где лежат готовые файлы нашего React-приложения.
-// Он будет брать их из папки frontend/dist.
 app.use(express.static(path.join(__dirname, '../frontend/dist')));
 
 // --- API ЭНДПОИНТЫ ---
-// Вся наша логика API теперь будет жить по пути /api/...
 const apiRouter = express.Router();
 
-// Middleware для проверки подлинности пользователя Telegram
 const validateTelegramAuth = (req, res, next) => {
     try {
         const authHeader = req.headers['authorization'];
@@ -62,35 +66,25 @@ const validateTelegramAuth = (req, res, next) => {
         req.userId = user.id.toString();
         next();
     } catch (error) {
-        console.error("Auth validation error:", error);
         return res.status(500).send('Internal Server Error during auth');
     }
 };
 
-// Получить данные профиля пользователя
 apiRouter.get('/profile', validateTelegramAuth, async (req, res) => {
     try {
         const userRef = db.collection('users').doc(req.userId);
         const doc = await userRef.get();
-
         if (!doc.exists) {
-            const defaultProfile = {
-                tastes: [],
-                notifications: { morning: true, shopping: false },
-                plan: null,
-            };
+            const defaultProfile = { tastes: [], plan: null };
             await userRef.set(defaultProfile);
             return res.json(defaultProfile);
         }
-
         res.json(doc.data());
     } catch (error) {
-        console.error("Error getting profile:", error);
         res.status(500).send('Internal Server Error');
     }
 });
 
-// Обновить вкусовые предпочтения
 apiRouter.post('/profile/tastes', validateTelegramAuth, async (req, res) => {
     const { tastes } = req.body;
     if (!Array.isArray(tastes)) {
@@ -101,18 +95,13 @@ apiRouter.post('/profile/tastes', validateTelegramAuth, async (req, res) => {
         await userRef.update({ tastes });
         res.status(200).json({ message: 'Tastes updated successfully' });
     } catch (error) {
-        console.error("Error updating tastes:", error);
         res.status(500).send('Internal Server Error');
     }
 });
 
-// Регистрируем все наши API-маршруты по префиксу /api
 app.use('/api', apiRouter);
 
-
 // --- ОБРАБОТКА ВСЕХ ОСТАЛЬНЫХ ЗАПРОСОВ ---
-// Эта часть очень важна для React. Если запрос не является запросом к API,
-// мы отдаем главный файл index.html. React сам разберется, какую страницу показать.
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/dist', 'index.html'));
 });
